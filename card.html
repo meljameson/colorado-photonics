@@ -21,6 +21,14 @@
     .row label { display: flex; gap: 6px; align-items: center; color: var(--text); font-weight: 500; }
     canvas { display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--border); }
     button.button { width: 100%; border: 0; font: inherit; font-weight: 700; cursor: pointer; }
+    .row { border: 0; margin: 0; padding: 0; }
+    .alt { display: grid; gap: 6px; margin-top: 24px; font-size: 0.85rem; font-weight: 600; color: var(--muted); }
+    .alt textarea {
+      font: inherit; font-weight: 400; font-size: 0.95rem; color: var(--text); background: var(--surface);
+      border: 1px solid var(--border); border-radius: 10px; padding: 10px; resize: vertical;
+    }
+    .hint { margin: 0; font-weight: 400; }
+    button.secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
   </style>
 </head>
 <body>
@@ -31,19 +39,30 @@
       <p>Make an Instagram image from an entry in events.json</p>
     </header>
 
+    <main>
     <div class="controls">
       <label>Event
         <select id="event"></select>
       </label>
-      <div class="row">
+      <fieldset class="row">
+        <legend class="sr-only">Image size</legend>
         <label><input type="radio" name="size" value="1440" checked> 1080 × 1440 (3:4)</label>
         <label><input type="radio" name="size" value="1350"> 1080 × 1350 (4:5)</label>
+      </fieldset>
+      <div class="row">
         <label><input type="checkbox" id="past"> Show past events</label>
       </div>
     </div>
 
-    <canvas id="card" width="1080" height="1440"></canvas>
+    <canvas id="card" width="1080" height="1440" role="img"></canvas>
     <button class="button" id="download" type="button">Download PNG</button>
+
+    <label class="alt">Alt text for Instagram
+      <textarea id="alt" rows="7" readonly></textarea>
+      <p class="hint">When posting: Advanced settings → Accessibility → Write alt text, then paste this.</p>
+    </label>
+    <button class="button secondary" id="copy-alt" type="button">Copy alt text</button>
+    </main>
   </div>
 
   <script type="module" src="card.js"></script>

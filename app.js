@@ -21,20 +21,27 @@ function eventCard(e, past = false) {
     el("span", { class: "badge-day" }, String(d.getDate())),
   );
 
-  const when = e.time ? `${formatDateRange(e)} · ${e.time}` : formatDateRange(e);
+  // The middle dot is decorative; screen readers hear a comma instead of "dot".
+  const when = e.time
+    ? [formatDateRange(e), el("span", { "aria-hidden": "true" }, " · "), el("span", { class: "sr-only" }, ", "), e.time]
+    : [formatDateRange(e)];
   const body = el(
     "div",
     { class: "event-body" },
     el("h3", {}, e.title),
     e.summary && el("p", { class: "summary" }, e.summary),
-    el("p", { class: "meta" }, when),
+    el("p", { class: "meta" }, ...when),
     whereLine(e) && el("p", { class: "meta" }, whereLine(e)),
     e.host && el("p", { class: "meta" }, `Hosted by ${e.host}`),
     e.audience && el("p", { class: "tag" }, e.audience),
     e.url &&
-      (past
-        ? el("a", { class: "link", href: e.url, target: "_blank", rel: "noopener" }, "Event page")
-        : el("a", { class: "button", href: e.url, target: "_blank", rel: "noopener" }, "Event details")),
+      el(
+        "a",
+        { class: past ? "link" : "button", href: e.url, target: "_blank", rel: "noopener" },
+        past ? "Event page" : "Event details",
+        // Every button says the same thing, so give screen readers which event and where it opens.
+        el("span", { class: "sr-only" }, `: ${e.title} (opens in a new tab)`),
+      ),
   );
 
   return el("li", {}, el("article", { class: past ? "event past" : "event" }, badge, body));
@@ -52,7 +59,8 @@ function byMonth(events, past = false) {
       "section",
       { class: "month" },
       el("h2", {}, monthLabel(key)),
-      el("ol", { class: "events" }, ...list.map((e) => eventCard(e, past))),
+      // role="list" keeps list semantics in Safari/VoiceOver, which drops them when list-style is none.
+      el("ol", { class: "events", role: "list" }, ...list.map((e) => eventCard(e, past))),
     ),
   );
 }
@@ -89,5 +97,6 @@ loadEvents()
   .then(render)
   .catch((err) => {
     console.error(err);
-    main.replaceChildren(el("p", { class: "status" }, "Couldn't load events. Please try again later."));
-  });
+    main.replaceChildren(el("p", { class: "status", role: "alert" }, "Couldn't load events. Please try again later."));
+  })
+  .finally(() => main.removeAttribute("aria-busy"));

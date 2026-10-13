@@ -4,7 +4,7 @@ const W = 1080;
 const PAD = 96;
 const FONT = "Inter, system-ui, sans-serif";
 const SPECTRUM = ["#7b2ff7", "#2f6bff", "#00c2d1", "#2fd16b", "#ffd400", "#ff8a00", "#ff2d55"];
-const C = { bg1: "#0c1a2e", bg2: "#16304f", text: "#ffffff", muted: "#b4c0d4", accent: "#f2b632" };
+const C = { bg1: "#0c1a2e", bg2: "#16304f", text: "#ffffff", muted: "#c8d1e0", accent: "#f2b632" };
 
 const canvas = document.getElementById("card");
 const ctx = canvas.getContext("2d");
@@ -171,10 +171,38 @@ function height() {
   return Number(document.querySelector('input[name="size"]:checked').value);
 }
 
+// Screen readers can't read text baked into an image, so spell the card out for Instagram's alt text field.
+function altText(e) {
+  const parts = [`Event announcement from ${SITE.name}: ${e.title}.`];
+  if (e.summary) parts.push(`${e.summary}.`);
+  parts.push(`When: ${[formatDateRange(e), e.time].filter(Boolean).join(", ")}.`);
+  if (whereLine(e)) parts.push(`Where: ${whereLine(e)}.`);
+  if (e.host) parts.push(`Hosted by ${e.host}.`);
+  if (e.audience) parts.push(`Who: ${e.audience}.`);
+  parts.push("Event details at the link in bio.");
+  return parts.join(" ");
+}
+
+const altBox = document.getElementById("alt");
+
 function redraw() {
   const e = currentEvent();
-  if (e) draw(e, height());
+  if (!e) return;
+  draw(e, height());
+  altBox.value = altText(e);
+  canvas.setAttribute("aria-label", altBox.value);
 }
+
+document.getElementById("copy-alt").addEventListener("click", async (ev) => {
+  try {
+    await navigator.clipboard.writeText(altBox.value);
+    ev.target.textContent = "Copied!";
+  } catch {
+    altBox.select();
+    ev.target.textContent = "Press Ctrl+C / ⌘C to copy";
+  }
+  setTimeout(() => (ev.target.textContent = "Copy alt text"), 2000);
+});
 
 function fillSelect() {
   const prev = currentEvent();
