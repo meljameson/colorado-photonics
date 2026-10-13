@@ -1,10 +1,33 @@
 [
   {
+    "title": "ICALEO 2026: International Congress on Applications of Lasers & Electro-Optics",
+    "start": "2026-10-05",
+    "end": "2026-10-08",
+    "venue": "Hilton Denver City Center",
+    "city": "Denver",
+    "host": "Laser Institute of America",
+    "summary": "Laser materials processing, ultrafast lasers, additive manufacturing, sensing and monitoring, and photonic-component fabrication",
+    "url": "https://icaleo.org"
+  },
+  {
+    "title": "Measuring Fundamental Particle Interactions with Levitated Optomechanical Sensors",
+    "start": "2026-10-27",
+    "time": "11:00 AM – 12:00 PM",
+    "venue": "JILA",
+    "city": "Boulder",
+    "host": "JILA",
+    "summary": "Yu-Han Tseng on optically trapped nanoparticles as ultra-sensitive force sensors, from single gas collisions to dark matter searches",
+    "audience": "Students, faculty & postdocs",
+    "url": "https://calendar.colorado.edu/event/jila-science-seminar-yu-han-tseng"
+  },
+  {
     "title": "IEEE Photonics Conference",
     "start": "2026-11-08",
     "end": "2026-11-12",
     "venue": "Denver Marriott Tech Center",
     "city": "Denver",
+    "host": "IEEE Photonics Society",
+    "summary": "The IEEE Photonics Society's annual flagship conference on optics and photonics research",
     "audience": "Students & professionals",
     "url": "https://ieee-ipc.org/"
   },
@@ -19,20 +42,13 @@
     "audience": "Students, researchers & industry"
   },
   {
-    "title": "Sample: Optics Meetup & Lab Tour",
-    "start": "2026-10-22",
-    "time": "6:00–8:00 PM",
-    "venue": "Sample Venue",
-    "city": "Boulder",
-    "audience": "Everyone welcome",
-    "url": "https://example.com/replace-me"
-  },
-  {
-    "title": "Sample: Laser Safety Workshop",
-    "start": "2026-12-03",
-    "venue": "Sample Venue",
-    "city": "Denver",
-    "audience": "Professionals",
-    "url": "https://example.com/replace-me"
+    "title": "Rocky Mountain Photonics Summit & Expo",
+    "start": "2027-04-16",
+    "time": "10:00 AM – 6:00 PM",
+    "venue": "Denver Marriott Westminster",
+    "city": "Westminster",
+    "host": "Colorado Photonics Industry Association",
+    "summary": "Photonics exhibitors and technical sessions on lasers, sensors, spectrometers, and semiconductors",
+    "url": "https://members.coloradophotonics.org/events/Details/rocky-mountain-photonics-summit-expo-2027-1848551"
   }
 ]

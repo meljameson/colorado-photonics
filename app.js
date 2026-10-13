@@ -12,7 +12,7 @@ function el(tag, attrs = {}, ...children) {
   return node;
 }
 
-function eventCard(e) {
+function eventCard(e, past = false) {
   const d = parseDate(e.start);
   const badge = el(
     "div",
@@ -32,33 +32,46 @@ function eventCard(e) {
     e.host && el("p", { class: "meta" }, `Hosted by ${e.host}`),
     e.audience && el("p", { class: "tag" }, e.audience),
     e.url &&
-      el("a", { class: "button", href: e.url, target: "_blank", rel: "noopener" }, "Event details"),
+      (past
+        ? el("a", { class: "link", href: e.url, target: "_blank", rel: "noopener" }, "Event page")
+        : el("a", { class: "button", href: e.url, target: "_blank", rel: "noopener" }, "Event details")),
   );
 
-  return el("li", {}, el("article", { class: "event" }, badge, body));
+  return el("li", {}, el("article", { class: past ? "event past" : "event" }, badge, body));
 }
 
-function render(events) {
-  main.replaceChildren();
-  if (!events.length) {
-    main.append(el("p", { class: "status" }, "No upcoming events right now. Check back soon!"));
-    return;
-  }
-
+function byMonth(events, past = false) {
   const groups = new Map();
   for (const e of events) {
     const key = monthKey(e);
     if (!groups.has(key)) groups.set(key, []);
     groups.get(key).push(e);
   }
+  return [...groups].map(([key, list]) =>
+    el(
+      "section",
+      { class: "month" },
+      el("h2", {}, monthLabel(key)),
+      el("ol", { class: "events" }, ...list.map((e) => eventCard(e, past))),
+    ),
+  );
+}
 
-  for (const [key, list] of groups) {
+function render(events) {
+  const upcoming = events.filter((e) => isUpcoming(e));
+  const past = events.filter((e) => !isUpcoming(e)).reverse(); // most recent first
+
+  main.replaceChildren();
+  if (upcoming.length) main.append(...byMonth(upcoming));
+  else main.append(el("p", { class: "status" }, "No upcoming events right now. Check back soon!"));
+
+  if (past.length) {
     main.append(
       el(
-        "section",
-        { class: "month" },
-        el("h2", {}, monthLabel(key)),
-        el("ol", { class: "events" }, ...list.map(eventCard)),
+        "details",
+        { class: "past-events" },
+        el("summary", {}, `Past events (${past.length})`),
+        ...byMonth(past, true),
       ),
     );
   }
@@ -73,7 +86,7 @@ if (SITE.instagram) {
 }
 
 loadEvents()
-  .then((events) => render(events.filter((e) => isUpcoming(e))))
+  .then(render)
   .catch((err) => {
     console.error(err);
     main.replaceChildren(el("p", { class: "status" }, "Couldn't load events. Please try again later."));
