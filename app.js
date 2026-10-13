@@ -26,15 +26,13 @@ function eventCard(e) {
     "div",
     { class: "event-body" },
     el("h3", {}, e.title),
+    e.summary && el("p", { class: "summary" }, e.summary),
     el("p", { class: "meta" }, when),
     whereLine(e) && el("p", { class: "meta" }, whereLine(e)),
+    e.host && el("p", { class: "meta" }, `Hosted by ${e.host}`),
     e.audience && el("p", { class: "tag" }, e.audience),
     e.url &&
-      el(
-        "a",
-        { class: "button", href: e.url, target: "_blank", rel: "noopener" },
-        "Details & registration",
-      ),
+      el("a", { class: "button", href: e.url, target: "_blank", rel: "noopener" }, "Event details"),
   );
 
   return el("li", {}, el("article", { class: "event" }, badge, body));

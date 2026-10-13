@@ -4,7 +4,7 @@ const W = 1080;
 const PAD = 96;
 const FONT = "Inter, system-ui, sans-serif";
 const SPECTRUM = ["#7b2ff7", "#2f6bff", "#00c2d1", "#2fd16b", "#ffd400", "#ff8a00", "#ff2d55"];
-const C = { bg1: "#0b1026", bg2: "#1d1450", text: "#ffffff", muted: "#b9bedb", accent: "#a99bff" };
+const C = { bg1: "#0c1a2e", bg2: "#16304f", text: "#ffffff", muted: "#b4c0d4", accent: "#f2b632" };
 
 const canvas = document.getElementById("card");
 const ctx = canvas.getContext("2d");
@@ -65,8 +65,8 @@ function draw(e, H) {
   ctx.fillStyle = bg;
   ctx.fillRect(0, 0, W, H);
   const glow = ctx.createRadialGradient(W * 0.85, H * 0.15, 0, W * 0.85, H * 0.15, W * 0.8);
-  glow.addColorStop(0, "rgba(143,123,255,0.35)");
-  glow.addColorStop(1, "rgba(143,123,255,0)");
+  glow.addColorStop(0, "rgba(96,156,230,0.22)");
+  glow.addColorStop(1, "rgba(96,156,230,0)");
   ctx.fillStyle = glow;
   ctx.fillRect(0, 0, W, H);
 
@@ -81,63 +81,86 @@ function draw(e, H) {
   spectrumBar(0, H - 14, W, 14);
   ctx.fillStyle = C.text;
   setFont(700, 38);
-  ctx.fillText("Details & registration → link in bio", PAD, footerY);
-  if (SITE.instagram) {
-    ctx.fillStyle = C.muted;
-    setFont(500, 30);
-    ctx.fillText(`@${SITE.instagram}`, PAD, footerY - 48);
+  ctx.fillText("Event details → link in bio", PAD, footerY);
+
+  // Lay out the content block, scaling it down until it fits between header and footer.
+  const top = PAD + 110;
+  const bottom = footerY - 50;
+  let L;
+  for (let k = 1; k >= 0.6; k -= 0.05) {
+    L = layout(e, inner, k);
+    if (L.height <= bottom - top) break;
   }
-
-  // Title: shrink until it fits in 4 lines
-  let size = 112;
-  let titleLines;
-  for (; size >= 60; size -= 4) {
-    setFont(800, size);
-    titleLines = wrap(e.title, inner);
-    if (titleLines.length <= 4 && titleLines.every((l) => ctx.measureText(l).width <= inner)) break;
-  }
-  const titleLH = Math.round(size * 1.08);
-
-  // Detail rows
-  setFont(600, 46);
-  const rows = [
-    ["When", [formatDateRange(e), e.time].filter(Boolean)],
-    ["Where", wrap(whereLine(e), inner).slice(0, 3)],
-    ["Who", e.audience ? wrap(e.audience, inner).slice(0, 2) : []],
-  ].filter(([, lines]) => lines.length);
-  const labelH = 44;
-  const valueLH = 58;
-  const rowGap = 44;
-  const rowsH = rows.reduce((h, [, lines]) => h + labelH + lines.length * valueLH, 0) + rowGap * (rows.length - 1);
-
-  // Center the content block between header and footer
-  const top = PAD + 120;
-  const bottom = footerY - (SITE.instagram ? 90 : 50);
-  const gap = 72;
-  const blockH = titleLines.length * titleLH + gap + rowsH;
-  let y = top + Math.max(0, (bottom - top - blockH) / 2);
+  if (L.height > bottom - top) console.warn(`Card content overflows by ${Math.round(L.height - (bottom - top))}px`);
+  let y = top + Math.max(0, (bottom - top - L.height) / 2);
 
   ctx.fillStyle = C.text;
-  setFont(800, size);
-  for (const l of titleLines) {
-    ctx.fillText(l, PAD - size * 0.04, y);
-    y += titleLH;
+  setFont(800, L.title.size);
+  for (const l of L.title.lines) {
+    ctx.fillText(l, PAD - L.title.size * 0.04, y);
+    y += L.title.lh;
   }
-  y += gap;
+  if (L.summary.lines.length) {
+    y += L.summary.gap;
+    ctx.fillStyle = C.muted;
+    setFont(500, L.summary.size);
+    for (const l of L.summary.lines) {
+      ctx.fillText(l, PAD, y);
+      y += L.summary.lh;
+    }
+  }
+  y += L.gap;
 
-  for (const [label, lines] of rows) {
+  for (const [label, lines] of L.rows.items) {
     ctx.fillStyle = C.accent;
-    setFont(700, 28);
+    setFont(700, L.rows.labelSize);
     spacedText(label.toUpperCase(), PAD, y, 5);
-    y += labelH;
+    y += L.rows.labelH;
     ctx.fillStyle = C.text;
-    setFont(600, 46);
+    setFont(600, L.rows.size);
     for (const l of lines) {
       ctx.fillText(l, PAD, y);
-      y += valueLH;
+      y += L.rows.lh;
     }
-    y += rowGap;
+    y += L.rows.gap;
   }
+}
+
+// Measure everything at scale k without drawing.
+function layout(e, inner, k) {
+  const px = (n) => Math.round(n * k);
+
+  // Title: largest size that fits in 4 lines
+  let size = px(104);
+  let lines;
+  for (; size >= 48; size -= 4) {
+    setFont(800, size);
+    lines = wrap(e.title, inner);
+    if (lines.length <= 4 && lines.every((l) => ctx.measureText(l).width <= inner)) break;
+  }
+  const title = { size, lines, lh: Math.round(size * 1.08) };
+
+  // One-line "about" under the title
+  const summary = { size: px(40), lh: px(54), gap: px(28), lines: [] };
+  setFont(500, summary.size);
+  if (e.summary) summary.lines = wrap(e.summary, inner).slice(0, 3);
+
+  // Detail rows
+  const rows = { size: px(42), lh: px(54), labelSize: px(26), labelH: px(40), gap: px(36) };
+  setFont(600, rows.size);
+  rows.items = [
+    ["When", [formatDateRange(e), e.time].filter(Boolean)],
+    ["Where", wrap(whereLine(e), inner).slice(0, 2)],
+    ["Hosted by", e.host ? wrap(e.host, inner).slice(0, 3) : []],
+    ["Who", e.audience ? wrap(e.audience, inner).slice(0, 2) : []],
+  ].filter(([, l]) => l.length);
+
+  const gap = px(64);
+  const titleH = title.lines.length * title.lh;
+  const summaryH = summary.lines.length ? summary.gap + summary.lines.length * summary.lh : 0;
+  const rowsH =
+    rows.items.reduce((h, [, l]) => h + rows.labelH + l.length * rows.lh, 0) + rows.gap * (rows.items.length - 1);
+  return { title, summary, rows, gap, height: titleH + summaryH + gap + rowsH };
 }
 
 function currentEvent() {

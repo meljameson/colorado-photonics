@@ -21,6 +21,8 @@ Add an entry to `events.json`:
   "time": "9:00 AM – 5:00 PM",
   "venue": "Denver Marriott Tech Center",
   "city": "Denver",
+  "host": "IEEE Photonics Society",
+  "summary": "One line on what the event is about",
   "audience": "Students & professionals",
   "url": "https://organizer-site.example/register"
 }
@@ -28,7 +30,9 @@ Add an entry to `events.json`:
 
 - `title` and `start` (`YYYY-MM-DD`) are required.
 - `end` is optional. Leave it out for one-day events.
-- `time`, `venue`, `city`, `audience`, `url` are optional.
+- `time`, `venue`, `city`, `host`, `summary`, `audience`, `url` are optional.
+- `summary` is a single line that says what the event is about. It appears under the title.
+- Keep to facts that rarely change. Leave registration status, cost and deadlines to the organizer's page, which `url` links to as **Event details**.
 - Separate entries with commas, and put no comma after the last one. If the page shows "Couldn't load events", check for a missing or extra comma.
 - Order doesn't matter, because the site sorts entries by date. An event disappears the day after its `end` date.
 
@@ -41,7 +45,7 @@ Open `https://<your-username>.github.io/<repo>/card.html`, choose the event and 
 ## One-time setup
 
 1. **GitHub Pages:** create a repo (for example `colorado-photonics`) and push these files to `main`. Then go to **Settings → Pages → Build and deployment**, choose **Deploy from a branch**, and select `main` / `/ (root)`. The site will be at `https://<your-username>.github.io/colorado-photonics/`.
-2. **Instagram:** put that URL in your bio. In `events.js`, set `SITE.instagram` to your handle (without the `@`). The handle then appears on the page footer and on the cards.
+2. **Instagram:** put that URL in your bio. In `events.js`, set `SITE.instagram` to your handle (without the `@`). The handle then appears in the page footer.
 3. **Cloudflare Web Analytics:** in Cloudflare, go to **Analytics & Logs → Web Analytics → Add a site**. Enter your github.io hostname and copy the token from the JS snippet. Paste it into the commented-out block at the bottom of `index.html` and uncomment the block. Don't add analytics to `card.html`.
 
 ## Previewing locally
