@@ -1,0 +1,28 @@
+[
+  {
+    "title": "IEEE Photonics Conference",
+    "start": "2026-11-08",
+    "end": "2026-11-12",
+    "venue": "Denver Marriott Tech Center",
+    "city": "Denver",
+    "audience": "Students & professionals",
+    "url": "https://ieee-ipc.org/"
+  },
+  {
+    "title": "Sample: Optics Meetup & Lab Tour",
+    "start": "2026-10-22",
+    "time": "6:00–8:00 PM",
+    "venue": "Sample Venue",
+    "city": "Boulder",
+    "audience": "Everyone welcome",
+    "url": "https://example.com/replace-me"
+  },
+  {
+    "title": "Sample: Laser Safety Workshop",
+    "start": "2026-12-03",
+    "venue": "Sample Venue",
+    "city": "Denver",
+    "audience": "Professionals",
+    "url": "https://example.com/replace-me"
+  }
+]
