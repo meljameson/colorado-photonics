@@ -10,6 +10,17 @@
     "url": "https://icaleo.org"
   },
   {
+    "title": "CPIA University Meeting",
+    "start": "2026-10-22",
+    "time": "3:00 – 6:00 PM",
+    "venue": "SEEC Center",
+    "city": "Boulder",
+    "host": "Colorado Photonics Industry Association",
+    "summary": "Photonics research updates from Colorado universities, plus industry career tables",
+    "audience": "Students, researchers, & industry",
+    "url": "https://members.coloradophotonics.org/events/Details/2026-annual-cpia-university-meeting-1846950"
+  },
+  {
     "title": "Measuring Fundamental Particle Interactions with Levitated Optomechanical Sensors",
     "start": "2026-10-27",
     "time": "11:00 AM – 12:00 PM",
@@ -19,6 +30,17 @@
     "summary": "Yu-Han Tseng on optically trapped nanoparticles as ultra-sensitive force sensors, from single gas collisions to dark matter searches",
     "audience": "Students, faculty & postdocs",
     "url": "https://calendar.colorado.edu/event/jila-science-seminar-yu-han-tseng"
+  },
+  {
+    "title": "Qiskit Fall Fest 2026",
+    "start": "2026-11-04",
+    "end": "2026-11-11",
+    "venue": "CU Boulder campus",
+    "city": "Boulder",
+    "host": "University of Colorado Boulder, with IBM Quantum",
+    "summary": "Quantum computing lectures, a hackathon, a quantum panel, and lab tours",
+    "audience": "Students",
+    "url": "https://www.colorado.edu/event/qiskit-fall-fest/"
   },
   {
     "title": "IEEE Photonics Conference",
