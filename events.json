@@ -21,6 +21,17 @@
     "url": "https://members.coloradophotonics.org/events/Details/2026-annual-cpia-university-meeting-1846950"
   },
   {
+    "title": "Designer Cold Atom Systems",
+    "start": "2026-10-26",
+    "time": "11:00 AM – 12:00 PM",
+    "venue": "JILA Auditorium",
+    "city": "Boulder",
+    "host": "JILA",
+    "summary": "Trey Porto (JQI/NIST) on Floquet-engineered optical lattices and microwave-controlled Rydberg interactions",
+    "audience": "Students, faculty & postdocs",
+    "url": "https://calendar.colorado.edu/event/jila-visiting-fellow-colloquium-trey-porto-jqi-university-of-maryland-and-nist"
+  },
+  {
     "title": "Measuring Fundamental Particle Interactions with Levitated Optomechanical Sensors",
     "start": "2026-10-27",
     "time": "11:00 AM – 12:00 PM",
@@ -30,6 +41,17 @@
     "summary": "Yu-Han Tseng on optically trapped nanoparticles as ultra-sensitive force sensors, from single gas collisions to dark matter searches",
     "audience": "Students, faculty & postdocs",
     "url": "https://calendar.colorado.edu/event/jila-science-seminar-yu-han-tseng"
+  },
+  {
+    "title": "A Prototype of a Commercial Optical Lattice Clock",
+    "start": "2026-11-02",
+    "time": "1:30 – 2:30 PM",
+    "venue": "JILA Auditorium",
+    "city": "Boulder",
+    "host": "JILA",
+    "summary": "Hiutat Yang on a transportable strontium lattice clock, from system design to field testing",
+    "audience": "Students, faculty & postdocs",
+    "url": "https://calendar.colorado.edu/event/jila-science-seminar-hiutat-yang"
   },
   {
     "title": "Qiskit Fall Fest 2026",
@@ -63,6 +85,28 @@
     "summary": "Research talks, a poster session, and an update on the National Quantum Nanofabrication Facility",
     "audience": "Students, researchers & industry",
     "url": "https://calendar.colorado.edu/event/cosinc-innovation-networking-event-2026"
+  },
+  {
+    "title": "Optics & Friends",
+    "start": "2026-11-16",
+    "end": "2026-11-18",
+    "dateText": "November 16 or 18, 2026 (date TBC)",
+    "venue": "Asher Brewing Company",
+    "city": "Boulder",
+    "host": "Colorado Photonics Industry Association",
+    "summary": "Casual networking with craft beverages, food, and bluegrass on the patio",
+    "audience": "Professionals",
+    "url": "https://members.coloradophotonics.org/events/Details/optics-friends-fall-2026-quantum-catalyst-collaboration-1848554"
+  },
+  {
+    "title": "SPIE Quantum Catalyst 2026",
+    "start": "2026-11-17",
+    "end": "2026-11-18",
+    "venue": "Limelight Boulder Hotel",
+    "city": "Boulder",
+    "host": "SPIE",
+    "summary": "Quantum commercialization, supply-chain scaling, optical clocks and quantum sensing, and workforce development",
+    "url": "https://spie.org/conferences-and-exhibitions/quantum-catalyst"
   },
   {
     "title": "Rocky Mountain Photonics Summit & Expo",

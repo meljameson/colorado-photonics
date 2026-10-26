@@ -17,8 +17,12 @@ function eventCard(e, past = false) {
   const badge = el(
     "div",
     { class: "badge", "aria-hidden": "true" },
-    el("span", { class: "badge-dow" }, d.toLocaleDateString("en-US", { weekday: "short" })),
-    el("span", { class: "badge-day" }, String(d.getDate())),
+    ...(e.dateText
+      ? [el("span", { class: "badge-dow" }, d.toLocaleDateString("en-US", { month: "short" })), el("span", { class: "badge-tbc" }, "TBC")]
+      : [
+          el("span", { class: "badge-dow" }, d.toLocaleDateString("en-US", { weekday: "short" })),
+          el("span", { class: "badge-day" }, String(d.getDate())),
+        ]),
   );
 
   // The middle dot is decorative; screen readers hear a comma instead of "dot".

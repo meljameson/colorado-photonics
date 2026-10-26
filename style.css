@@ -101,6 +101,7 @@ body::after {
 }
 .badge-dow { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
 .badge-day { font-size: 1.4rem; font-weight: 800; line-height: 1.1; }
+.badge-tbc { font-size: 0.95rem; font-weight: 800; line-height: 1.4; }
 
 .event-body { min-width: 0; flex: 1; }
 .event h3 { margin: 0 0 4px; font-size: 1.1rem; font-weight: 700; line-height: 1.3; }

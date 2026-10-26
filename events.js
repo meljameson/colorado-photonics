@@ -39,6 +39,7 @@ const monthName = (d) => d.toLocaleDateString("en-US", { month: "long" });
 
 // November 8, 2026 · November 8–12, 2026 · October 30 – November 2, 2026
 export function formatDateRange(e) {
+  if (e.dateText) return e.dateText; // for unconfirmed dates, e.g. "November 16 or 18, 2026 (date TBC)"
   const s = parseDate(e.start);
   const t = parseDate(e.end);
   const sy = s.getFullYear();
