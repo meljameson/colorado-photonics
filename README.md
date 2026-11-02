@@ -6,7 +6,7 @@ A mobile-friendly "link in bio" page for Instagram, plus a generator for Instagr
 | --- | --- |
 | `events.json` | **The only file you edit.** One entry per event. |
 | `index.html` | The public page. Shows upcoming events grouped by month, sorted by date. Past events are hidden automatically. |
-| `card.html` | Your private tool for Instagram cards. Pick an event and download a 1080×1440 or 1080×1350 PNG. |
+| `card.html` | A tool for generation Instagram cards. Pick an event and download 4:5 PNG. |
 | `events.js`, `app.js`, `card.js`, `style.css` | Code. `events.js` also has `SITE` settings (name, Instagram handle). |
 
 ## Adding an event
@@ -33,23 +33,21 @@ Add an entry to `events.json`:
 - `time`, `venue`, `city`, `host`, `summary`, `audience`, `url` are optional.
 - `dateText` (optional) replaces the displayed date when it isn't final, e.g. `"November 16 or 18, 2026 (date TBC)"`. Set `start`/`end` to the earliest and latest possible days so the event sorts and expires correctly.
 - `summary` is a single line that says what the event is about. It appears under the title.
-- Keep to facts that rarely change. Leave registration status, cost and deadlines to the organizer's page, which `url` links to as **Event details**.
+- Keep to facts that rarely change. Leave registration status, cost and deadlines to the organizer's page, which `url` links to as Event details.
 - Separate entries with commas, and put no comma after the last one. If the page shows "Couldn't load events", check for a missing or extra comma.
 - Order doesn't matter, because the site sorts entries by date. An event disappears the day after its `end` date.
 
-Then commit and push. GitHub Pages updates within a minute or two.
-
 ## Making an Instagram card
 
-Open `https://<your-username>.github.io/<repo>/card.html`, choose the event and size, then click **Download PNG**. This page isn't linked from the public site and asks search engines not to index it.
+Open `https://<site>/card.html`, choose the event and size, then click **Download PNG**. This page isn't linked from the public site and asks search engines not to index it.
 
-## One-time setup
+## GH Pages setup
 
 1. **GitHub Pages:** create a repo (for example `colorado-photonics`) and push these files to `main`. Then go to **Settings → Pages → Build and deployment**, choose **Deploy from a branch**, and select `main` / `/ (root)`. The site will be at `https://<your-username>.github.io/colorado-photonics/`.
 2. **Instagram:** put that URL in your bio. In `events.js`, set `SITE.instagram` to your handle (without the `@`). The handle then appears in the page footer.
 3. **Cloudflare Web Analytics:** in Cloudflare, go to **Analytics & Logs → Web Analytics → Add a site**. Enter your github.io hostname and copy the token from the JS snippet. Paste it into the commented-out block at the bottom of `index.html` and uncomment the block. Don't add analytics to `card.html`.
 
-## Previewing locally
+## Local Development
 
 Browsers block `fetch` of `events.json` when you open files directly from disk, so preview with a local server:
 
@@ -57,4 +55,4 @@ Browsers block `fetch` of `events.json` when you open files directly from disk, 
 python3 -m http.server 8000
 ```
 
-Then open <http://localhost:8000> and <http://localhost:8000/card.html>.
+View from <http://localhost:8000> and <http://localhost:8000/card.html>.
