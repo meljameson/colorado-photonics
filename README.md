@@ -37,16 +37,6 @@ Add an entry to `events.json`:
 - Separate entries with commas, and put no comma after the last one. If the page shows "Couldn't load events", check for a missing or extra comma.
 - Order doesn't matter, because the site sorts entries by date. An event disappears the day after its `end` date.
 
-## Making an Instagram card
-
-Open `https://<site>/card.html`, choose the event and size, then click **Download PNG**. This page isn't linked from the public site and asks search engines not to index it.
-
-## GH Pages setup
-
-1. **GitHub Pages:** create a repo (for example `colorado-photonics`) and push these files to `main`. Then go to **Settings → Pages → Build and deployment**, choose **Deploy from a branch**, and select `main` / `/ (root)`. The site will be at `https://<your-username>.github.io/colorado-photonics/`.
-2. **Instagram:** put that URL in your bio. In `events.js`, set `SITE.instagram` to your handle (without the `@`). The handle then appears in the page footer.
-3. **Cloudflare Web Analytics:** in Cloudflare, go to **Analytics & Logs → Web Analytics → Add a site**. Enter your github.io hostname and copy the token from the JS snippet. Paste it into the commented-out block at the bottom of `index.html` and uncomment the block. Don't add analytics to `card.html`.
-
 ## Local Development
 
 Browsers block `fetch` of `events.json` when you open files directly from disk, so preview with a local server:
