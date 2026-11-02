@@ -87,18 +87,6 @@
     "url": "https://calendar.colorado.edu/event/cosinc-innovation-networking-event-2026"
   },
   {
-    "title": "Optics & Friends",
-    "start": "2026-11-16",
-    "end": "2026-11-18",
-    "dateText": "November 16 or 18, 2026 (date TBC)",
-    "venue": "Asher Brewing Company",
-    "city": "Boulder",
-    "host": "Colorado Photonics Industry Association",
-    "summary": "Casual networking with craft beverages, food, and bluegrass on the patio",
-    "audience": "Professionals",
-    "url": "https://members.coloradophotonics.org/events/Details/optics-friends-fall-2026-quantum-catalyst-collaboration-1848554"
-  },
-  {
     "title": "SPIE Quantum Catalyst 2026",
     "start": "2026-11-17",
     "end": "2026-11-18",
@@ -107,6 +95,30 @@
     "host": "SPIE",
     "summary": "Quantum commercialization, supply-chain scaling, optical clocks and quantum sensing, and workforce development",
     "url": "https://spie.org/conferences-and-exhibitions/quantum-catalyst"
+  },
+  {
+    "title": "DARPA Mission Connect: Colorado",
+    "start": "2026-11-18",
+    "time": "8:15 AM – 4:00 PM",
+    "venue": "Folsom Field, CU Boulder",
+    "city": "Boulder",
+    "host": "DARPAConnect and CU Boulder",
+    "summary": "DARPA program managers on research priorities, upcoming programs, and how researchers and small companies can work with them, in person or online",
+    "audience": "Researchers & small companies",
+    "url": "https://www.darpa.mil/events/2026/darpaconnect-colorado"
+  },
+  {
+    "title": "Optics & Friends",
+    "start": "2026-12-10",
+    "end": "2026-12-10",
+    "dateText": "December 10, 2026 (tentative)",
+    "time": "6:00 – 10:00 PM",
+    "venue": "Asher Brewing Company (location TBC)",
+    "city": "Boulder",
+    "host": "Colorado Photonics Industry Association",
+    "summary": "Casual networking with craft beer, food, and live bluegrass",
+    "audience": "Professionals",
+    "url": "https://members.coloradophotonics.org/events/Details/optics-friends-fall-2026-quantum-catalyst-collaboration-1848554"
   },
   {
     "title": "Rocky Mountain Photonics Summit & Expo",
