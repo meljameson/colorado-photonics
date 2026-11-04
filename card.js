@@ -164,11 +164,11 @@ function layout(e, inner, k) {
 }
 
 function currentEvent() {
-  return events[Number(select.value)];
+  return select.value === "" ? undefined : events[Number(select.value)];
 }
 
 function height() {
-  return Number(document.querySelector('input[name="size"]:checked').value);
+  return Number(document.querySelector('input[name="size"]:checked')?.value ?? 1350);
 }
 
 // Screen readers can't read text baked into an image, so spell the card out for Instagram's alt text field.
@@ -183,26 +183,77 @@ function altText(e) {
   return parts.join(" ");
 }
 
+// Hashtag suggestions: 1 brand + 1 place + 2 topics + 1 event-specific (Instagram allows only a few).
+// An event can override these with "tags": ["#One", "#Two", ...] in events.json.
+// Rules are checked in order, so more specific topics win over general ones.
+const TOPIC_TAGS = [
+  [/optical clock|lattice clock|strontium/i, "#OpticalClocks"],
+  [/cold atom|ultracold|rydberg|optical lattice|tweezer/i, "#ColdAtoms"],
+  [/optomechanic|levitat/i, "#Optomechanics"],
+  [/metrolog|precision measurement|force sens/i, "#Metrology"],
+  [/\bJILA\b|atomic/i, "#AMOPhysics"],
+  [/quantum comput|qiskit/i, "#QuantumComputing"],
+  [/quantum sens/i, "#QuantumSensing"],
+  [/ultrafast/i, "#UltrafastLasers"],
+  [/laser materials|laser processing|additive manufacturing/i, "#LaserProcessing"],
+  [/laser/i, "#LaserTechnology"],
+  [/nanofab|cleanroom/i, "#Nanofabrication"],
+  [/microelectronic|semiconductor/i, "#Microelectronics"],
+  [/career|networking/i, "#Networking"],
+  [/quantum/i, "#QuantumTechnology"], // generic fallback; dropped when a specific quantum tag matched
+  [/photonic|optic/i, "#Photonics"],
+];
+const EVENT_TAGS = [
+  [/\bJILA\b/, "#JILA"],
+  [/qiskit/i, "#Qiskit"],
+  [/\bSPIE\b/, "#SPIE"],
+  [/\bIEEE\b/, "#IEEEPhotonics"],
+  [/ICALEO/, "#ICALEO"],
+  [/DARPA/, "#DARPA"],
+];
+
+function hashtags(e) {
+  if (Array.isArray(e.tags) && e.tags.length) return e.tags.join(" ");
+  const text = [e.title, e.summary, e.host, e.venue].filter(Boolean).join(" ");
+  const place = /boulder/i.test(e.city || "") ? "#BoulderColorado" : /denver|westminster/i.test(e.city || "") ? "#DenverTech" : "#ColoradoTech";
+  const eventTag = EVENT_TAGS.find(([re]) => re.test(text))?.[1];
+  let topics = [...new Set(TOPIC_TAGS.filter(([re]) => re.test(text)).map(([, tag]) => tag))];
+  if (topics.some((t) => /^#Quantum(Computing|Sensing)$/.test(t))) topics = topics.filter((t) => t !== "#QuantumTechnology");
+  if (!topics.includes("#Photonics")) topics.push("#Photonics");
+  const tags = ["#ColoradoPhotonics", place, ...topics.slice(0, eventTag ? 2 : 3), eventTag];
+  return tags.filter(Boolean).join(" ");
+}
+
 const altBox = document.getElementById("alt");
+const tagsBox = document.getElementById("tags");
 
 function redraw() {
   const e = currentEvent();
-  if (!e) return;
+  if (!e) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    altBox.value = tagsBox.value = "";
+    return;
+  }
   draw(e, height());
   altBox.value = altText(e);
+  tagsBox.value = hashtags(e);
   canvas.setAttribute("aria-label", altBox.value);
 }
 
-document.getElementById("copy-alt").addEventListener("click", async (ev) => {
-  try {
-    await navigator.clipboard.writeText(altBox.value);
-    ev.target.textContent = "Copied!";
-  } catch {
-    altBox.select();
-    ev.target.textContent = "Press Ctrl+C / ⌘C to copy";
-  }
-  setTimeout(() => (ev.target.textContent = "Copy alt text"), 2000);
-});
+function copyButton(buttonId, box, label) {
+  document.getElementById(buttonId).addEventListener("click", async (ev) => {
+    try {
+      await navigator.clipboard.writeText(box.value);
+      ev.target.textContent = "Copied!";
+    } catch {
+      box.select();
+      ev.target.textContent = "Press Ctrl+C / ⌘C to copy";
+    }
+    setTimeout(() => (ev.target.textContent = label), 2000);
+  });
+}
+copyButton("copy-alt", altBox, "Copy alt text");
+copyButton("copy-tags", tagsBox, "Copy hashtags");
 
 function fillSelect() {
   const prev = currentEvent();

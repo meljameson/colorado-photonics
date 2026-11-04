@@ -46,7 +46,7 @@
       </label>
       <fieldset class="row">
         <legend class="sr-only">Image size</legend>
-        <label><input type="radio" name="size" value="1350"> 1080 × 1350 (4:5)</label>
+        <label><input type="radio" name="size" value="1350" checked> 1080 × 1350 (4:5)</label>
       </fieldset>
       <div class="row">
         <label><input type="checkbox" id="past"> Show past events</label>
@@ -61,6 +61,12 @@
       <p class="hint">When posting: Advanced settings → Accessibility → Write alt text, then paste this.</p>
     </label>
     <button class="button secondary" id="copy-alt" type="button">Copy alt text</button>
+
+    <label class="alt">Suggested hashtags
+      <textarea id="tags" rows="2" spellcheck="false"></textarea>
+      <p class="hint">Edit freely before copying. Check the organizer's page for an official event hashtag.</p>
+    </label>
+    <button class="button secondary" id="copy-tags" type="button">Copy hashtags</button>
     </main>
   </div>
 

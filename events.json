@@ -105,7 +105,14 @@
     "host": "DARPAConnect and CU Boulder",
     "summary": "DARPA program managers on research priorities, upcoming programs, and how researchers and small companies can work with them, in person or online",
     "audience": "Researchers & small companies",
-    "url": "https://www.darpa.mil/events/2026/darpaconnect-colorado"
+    "url": "https://www.darpa.mil/events/2026/darpaconnect-colorado",
+    "tags": [
+      "#ColoradoPhotonics",
+      "#BoulderColorado",
+      "#Microelectronics",
+      "#AdvancedManufacturing",
+      "#DARPA"
+    ]
   },
   {
     "title": "Optics & Friends",

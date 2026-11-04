@@ -32,6 +32,7 @@ Add an entry to `events.json`:
 - `end` is optional. Leave it out for one-day events.
 - `time`, `venue`, `city`, `host`, `summary`, `audience`, `url` are optional.
 - `dateText` (optional) replaces the displayed date when it isn't final, e.g. `"November 16 or 18, 2026 (date TBC)"`. Set `start`/`end` to the earliest and latest possible days so the event sorts and expires correctly.
+- `tags` (optional) overrides the card generator's hashtag suggestions, e.g. `["#ColoradoPhotonics", "#BoulderColorado", "#Photonics"]`.
 - `summary` is a single line that says what the event is about. It appears under the title.
 - Keep to facts that rarely change. Leave registration status, cost and deadlines to the organizer's page, which `url` links to as Event details.
 - Separate entries with commas, and put no comma after the last one. If the page shows "Couldn't load events", check for a missing or extra comma.
