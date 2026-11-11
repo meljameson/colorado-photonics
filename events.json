@@ -87,6 +87,42 @@
     "url": "https://calendar.colorado.edu/event/cosinc-innovation-networking-event-2026"
   },
   {
+    "title": "High-Voltage & Electrical Safety Training",
+    "start": "2026-11-12",
+    "time": "11:00 AM – 12:00 PM",
+    "venue": "JILA Auditorium",
+    "city": "Boulder",
+    "host": "JILA",
+    "summary": "Eric Cornell on high-voltage and electrical hazards in research labs",
+    "audience": "Students, faculty & postdocs",
+    "url": "https://calendar.colorado.edu/event/safety-training-high-voltageelectrical-safety-training",
+    "tags": [
+      "#ColoradoPhotonics",
+      "#BoulderColorado",
+      "#LabSafety",
+      "#ElectricalSafety",
+      "#JILA"
+    ]
+  },
+  {
+    "title": "Coherent X-ray Interactions with Artificial Spin Ices",
+    "start": "2026-11-16",
+    "time": "11:00 AM – 12:00 PM",
+    "venue": "JILA",
+    "city": "Boulder",
+    "host": "JILA",
+    "summary": "J. Todd Hastings (University of Kentucky) on probing nanomagnet arrays with coherent X-rays and using them to shape X-ray beams",
+    "audience": "Students, faculty & postdocs",
+    "url": "https://calendar.colorado.edu/event/jila-science-seminar-6824",
+    "tags": [
+      "#ColoradoPhotonics",
+      "#BoulderColorado",
+      "#XRayScience",
+      "#Nanomagnetism",
+      "#JILA"
+    ]
+  },
+  {
     "title": "SPIE Quantum Catalyst 2026",
     "start": "2026-11-17",
     "end": "2026-11-18",
@@ -95,6 +131,17 @@
     "host": "SPIE",
     "summary": "Quantum commercialization, supply-chain scaling, optical clocks and quantum sensing, and workforce development",
     "url": "https://spie.org/conferences-and-exhibitions/quantum-catalyst"
+  },
+  {
+    "title": "Beyond the Standard Quantum Limit in Atomic Clocks",
+    "start": "2026-11-18",
+    "time": "11:00 AM – 12:00 PM",
+    "venue": "JILA Auditorium & Zoom",
+    "city": "Boulder",
+    "host": "JILA",
+    "summary": "Maya Miklos's thesis defense on a spin-squeezed strontium lattice clock with precision at the 10⁻¹⁸ level",
+    "audience": "Students, faculty, staff & postdocs",
+    "url": "https://calendar.colorado.edu/event/jila-thesis-defense-maya-miklos"
   },
   {
     "title": "DARPA Mission Connect: Colorado",
